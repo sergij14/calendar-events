@@ -43,7 +43,6 @@ export const EventCalendar: FC<EventCalendarProps> = ({ events }) => {
   return (
     <Calendar
       mode="month"
-      defaultValue={moment(new Date())}
       onSelect={onDateSelect}
       dateCellRender={dateCellRender}
     />
