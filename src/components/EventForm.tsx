@@ -24,7 +24,7 @@ export const EventForm: FC<EventFormProps> = (props) => {
   } = useTypedSelector((state) => state.event);
 
   const submitForm = () => {
-    if (date) {  
+    if (date) {
       props.submit({ ...event, author: user.username, date });
     }
   };
@@ -43,7 +43,11 @@ export const EventForm: FC<EventFormProps> = (props) => {
       </Form.Item>
 
       <Form.Item label="Guests" name="guest" rules={[rules.required()]}>
-        <Select onChange={(guest: string) => setEvent({ ...event, guest })}>
+        <Select
+          onChange={(guest: string) => setEvent({ ...event, guest })}
+          mode="multiple"
+          allowClear
+        >
           {props.guests.map((guest) => (
             <Select.Option key={guest.username} value={guest.username}>
               {guest.username}

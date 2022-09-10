@@ -20,9 +20,6 @@ export const LoginForm: React.FC = () => {
     <Card>
       <Form
         name="login-form"
-        labelCol={{ span: 8 }}
-        wrapperCol={{ span: 16 }}
-        initialValues={{ remember: true }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
@@ -50,11 +47,12 @@ export const LoginForm: React.FC = () => {
           <Input.Password />
         </Form.Item>
 
-        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+        <Form.Item>
           <Button type="primary" htmlType="submit" loading={isLoading}>
             Login
           </Button>
         </Form.Item>
+        <Alert type="warning" message="login: sergij14 | pass: 12345678" />
       </Form>
     </Card>
   );

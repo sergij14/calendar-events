@@ -38,6 +38,7 @@ export const AuthActionCreators = {
           );
           if (user) {
             dispatch(AuthActionCreators.setAuth(true));
+            dispatch(AuthActionCreators.setError(""));
             dispatch(AuthActionCreators.setUser({ ...user }));
             localStorage.setItem("auth", "true");
             localStorage.setItem("username", username);
