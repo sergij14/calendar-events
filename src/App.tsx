@@ -1,6 +1,6 @@
 import { Layout } from "antd";
 import React from "react";
-import { useRoutes, Navigate } from "react-router-dom";
+import { useRoutes } from "react-router-dom";
 import { NavBar } from "./components/NavBar";
 import { useTypedSelector } from "./hooks/useTypedSelector";
 import Event from "./pages/Event";
@@ -13,11 +13,11 @@ export enum RouteName {
 }
 
 const App = () => {
-  const { loggedIn } = useTypedSelector((state) => state.auth);
+  const { isLoggedIn } = useTypedSelector((state) => state.auth);
   const routes = useRoutes([
     {
       path: RouteName.EVENT,
-      element: loggedIn ? <Event /> : <Login />,
+      element: isLoggedIn ? <Event /> : <Login />,
     },
     {
       path: RouteName.LOGIN,
