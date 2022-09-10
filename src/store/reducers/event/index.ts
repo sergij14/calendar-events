@@ -22,8 +22,6 @@ export default function EventReducer(
     case EventActionEnum.SET_EVENTS:
       return { ...state, events: action.payload };
     case EventActionEnum.SET_SELECTED_DATE:
-      console.log(state);
-
       return {
         ...state,
         selectedDate: { ...state.selectedDate, ...action.payload },

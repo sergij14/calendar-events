@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import { Button, Col, Layout, Modal, Row, Tooltip } from "antd";
+import { Button, Col, Layout, Modal, Row, Space, Tooltip } from "antd";
 import { useActions } from "../hooks/useActions";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { IEvent } from "../models/IEvent";
@@ -44,17 +44,15 @@ const Event: FC = () => {
   };
 
   return (
-    <Layout>
+    <Layout style={{ backgroundColor: "white", padding: '8px'}}>
       <EventCalendar events={events} />
-      <Row gutter={2} justify="center" style={{ backgroundColor: "white" }}>
-        <Col className="gutter-row" span={2}>
+      <Row justify="center">
+        <Space size="small">
           <Tooltip title={error && error}>
             <Button onClick={() => showModal()} disabled={!createAllowed}>
               Add an event
             </Button>
           </Tooltip>
-        </Col>
-        <Col className="gutter-row" span={2}>
           <Button
             disabled={!removeAllowed}
             htmlType="button"
@@ -62,7 +60,7 @@ const Event: FC = () => {
           >
             Delete events
           </Button>
-        </Col>
+        </Space>
       </Row>
       <Modal
         title="Add an event"

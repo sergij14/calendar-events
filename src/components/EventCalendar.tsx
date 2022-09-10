@@ -38,8 +38,6 @@ export const EventCalendar: FC<EventCalendarProps> = ({ events }) => {
       error: isDateAfter ? "" : DATE_AFTER_ERROR_MESSAGE,
     });
 
-    console.log(isDateAfter);
-
     if (hasEvents) {
       setSelectedDate({
         removeAllowed: hasEvents,
