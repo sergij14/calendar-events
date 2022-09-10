@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import { Button, Col, Layout, Modal, Row, Space, Tooltip } from "antd";
+import { Button, Layout, Modal, Row, Space, Tooltip } from "antd";
 import { useActions } from "../hooks/useActions";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { IEvent } from "../models/IEvent";
