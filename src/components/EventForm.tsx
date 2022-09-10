@@ -4,7 +4,7 @@ import { rules } from "../utils/rules";
 import { IUser } from "../models/IUser";
 import { IEvent } from "../models/IEvent";
 import { useTypedSelector } from "../hooks/useTypedSelector";
-import { EVENT_TYPES } from "../constants/eventTypes";
+import { EVENT_TYPES } from "../constants";
 
 interface EventFormProps {
   guests: IUser[];
@@ -24,9 +24,7 @@ export const EventForm: FC<EventFormProps> = (props) => {
   } = useTypedSelector((state) => state.event);
 
   const submitForm = () => {
-    
     if (date) {  
-        console.log('asfasf');
       props.submit({ ...event, author: user.username, date });
     }
   };

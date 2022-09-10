@@ -4,6 +4,7 @@ import { IEvent } from "../models/IEvent";
 import moment, { Moment } from "moment";
 import { formatDate } from "../utils/date";
 import { useActions } from "../hooks/useActions";
+import { DATE_AFTER_ERROR_MESSAGE } from "../constants";
 
 interface EventCalendarProps {
   events: IEvent[];
@@ -34,7 +35,10 @@ export const EventCalendar: FC<EventCalendarProps> = ({ events }) => {
     setSelectedDate({
       date: selDate,
       createAllowed: isDateAfter,
+      error: isDateAfter ? "" : DATE_AFTER_ERROR_MESSAGE,
     });
+
+    console.log(isDateAfter);
 
     if (hasEvents) {
       setSelectedDate({
@@ -43,5 +47,12 @@ export const EventCalendar: FC<EventCalendarProps> = ({ events }) => {
     }
   };
 
-  return <Calendar mode="month" onSelect={onDateSelect} dateCellRender={dateCellRender} />;
+  return (
+    <Calendar
+      mode="month"
+      defaultValue={moment(new Date())}
+      onSelect={onDateSelect}
+      dateCellRender={dateCellRender}
+    />
+  );
 };

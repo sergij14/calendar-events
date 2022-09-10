@@ -1,16 +1,14 @@
-import moment from "moment";
-import { formatDate } from "../../../utils/date";
+import { DATE_AFTER_ERROR_MESSAGE } from "../../../constants";
 import { EventAction, EventActionEnum, EventState } from "./types";
-
-const today = new Date();
 
 const initialState: EventState = {
   events: [],
   guests: [],
   selectedDate: {
-    date: formatDate(today),
-    createAllowed: moment(today).isSameOrAfter(moment()),
+    date: "",
+    createAllowed: false,
     removeAllowed: false,
+    error: DATE_AFTER_ERROR_MESSAGE,
   },
 };
 

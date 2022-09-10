@@ -8,6 +8,7 @@ export interface EventState {
     date?: string;
     createAllowed?: boolean;
     removeAllowed?: boolean;
+    error?: string
   };
 }
 

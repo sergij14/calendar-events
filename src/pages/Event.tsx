@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import { Button, Layout, Modal, Row } from "antd";
+import { Button, Col, Layout, Modal, Row, Tooltip } from "antd";
 import { useActions } from "../hooks/useActions";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { IEvent } from "../models/IEvent";
@@ -13,16 +13,11 @@ export interface RemoveEvent {
 
 const Event: FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const {
-    fetchGuests,
-    createEvent,
-    fetchEvents,
-    removeEvents,
-  } = useActions();
+  const { fetchGuests, createEvent, fetchEvents, removeEvents } = useActions();
   const {
     guests,
     events,
-    selectedDate: { date, removeAllowed, createAllowed },
+    selectedDate: { date, removeAllowed, createAllowed, error },
   } = useTypedSelector((state) => state.event);
   const { user } = useTypedSelector((state) => state.auth);
 
@@ -51,17 +46,23 @@ const Event: FC = () => {
   return (
     <Layout>
       <EventCalendar events={events} />
-      <Row justify="center" style={{ backgroundColor: "white" }}>
-        <Button onClick={() => showModal()} disabled={!createAllowed}>
-          Add an event
-        </Button>
-        <Button
-          disabled={!removeAllowed}
-          htmlType="button"
-          onClick={() => fireRemoveEvents()}
-        >
-          Delete events
-        </Button>
+      <Row gutter={2} justify="center" style={{ backgroundColor: "white" }}>
+        <Col className="gutter-row" span={2}>
+          <Tooltip title={error && error}>
+            <Button onClick={() => showModal()} disabled={!createAllowed}>
+              Add an event
+            </Button>
+          </Tooltip>
+        </Col>
+        <Col className="gutter-row" span={2}>
+          <Button
+            disabled={!removeAllowed}
+            htmlType="button"
+            onClick={() => fireRemoveEvents()}
+          >
+            Delete events
+          </Button>
+        </Col>
       </Row>
       <Modal
         title="Add an event"
