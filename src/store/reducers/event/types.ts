@@ -4,11 +4,17 @@ import { IEvent } from "../../../models/IEvent";
 export interface EventState {
   guests: IUser[];
   events: IEvent[];
+  selectedDate: {
+    date?: string;
+    createAllowed?: boolean;
+    removeAllowed?: boolean;
+  };
 }
 
 export enum EventActionEnum {
   SET_GUESTS = "SET_GUESTS",
   SET_EVENTS = "SET_EVENTS",
+  SET_SELECTED_DATE = "SET_SELECTED_DATE",
 }
 
 export interface SetGuestsAction {
@@ -21,4 +27,12 @@ export interface SetEventsAction {
   payload: IEvent[];
 }
 
-export type EventAction = SetGuestsAction | SetEventsAction;
+export interface SetSelectedDateAction {
+  type: EventActionEnum.SET_SELECTED_DATE;
+  payload: EventState["selectedDate"];
+}
+
+export type EventAction =
+  | SetGuestsAction
+  | SetEventsAction
+  | SetSelectedDateAction;

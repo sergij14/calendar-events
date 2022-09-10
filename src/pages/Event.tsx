@@ -6,16 +6,34 @@ import { IEvent } from "../models/IEvent";
 import { EventCalendar } from "../components/EventCalendar";
 import { EventForm } from "../components/EventForm";
 
+export interface RemoveEvent {
+  allow: boolean;
+  date: string;
+}
+
 const Event: FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { fetchGuests, createEvent, fetchEvents } = useActions();
-  const { guests, events } = useTypedSelector((state) => state.event);
+  const {
+    fetchGuests,
+    createEvent,
+    fetchEvents,
+    removeEvents,
+  } = useActions();
+  const {
+    guests,
+    events,
+    selectedDate: { date, removeAllowed, createAllowed },
+  } = useTypedSelector((state) => state.event);
   const { user } = useTypedSelector((state) => state.auth);
 
   useEffect(() => {
     fetchGuests();
     fetchEvents(user.username);
   }, []);
+
+  const fireRemoveEvents = () => {
+    date && removeEvents(date);
+  };
 
   const addNewEvent = (event: IEvent) => {
     setIsModalOpen(false);
@@ -26,10 +44,6 @@ const Event: FC = () => {
     setIsModalOpen(true);
   };
 
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-
   const handleCancel = () => {
     setIsModalOpen(false);
   };
@@ -38,13 +52,21 @@ const Event: FC = () => {
     <Layout>
       <EventCalendar events={events} />
       <Row justify="center" style={{ backgroundColor: "white" }}>
-        <Button onClick={() => showModal()}>Add an event</Button>
+        <Button onClick={() => showModal()} disabled={!createAllowed}>
+          Add an event
+        </Button>
+        <Button
+          disabled={!removeAllowed}
+          htmlType="button"
+          onClick={() => fireRemoveEvents()}
+        >
+          Delete events
+        </Button>
       </Row>
       <Modal
         title="Add an event"
         footer={null}
         open={isModalOpen}
-        onOk={handleOk}
         onCancel={handleCancel}
       >
         <EventForm guests={guests} submit={addNewEvent} />

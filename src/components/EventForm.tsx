@@ -1,11 +1,9 @@
 import React, { FC, useState } from "react";
-import { Button, DatePicker, Form, Input, Row, Select } from "antd";
+import { Button, Form, Input, Row, Select } from "antd";
 import { rules } from "../utils/rules";
 import { IUser } from "../models/IUser";
 import { IEvent } from "../models/IEvent";
-import { Moment } from "moment";
 import { useTypedSelector } from "../hooks/useTypedSelector";
-import { formatDate } from "../utils/date";
 import { EVENT_TYPES } from "../constants/eventTypes";
 
 interface EventFormProps {
@@ -21,15 +19,16 @@ export const EventForm: FC<EventFormProps> = (props) => {
     guest: "",
   } as IEvent);
   const { user } = useTypedSelector((state) => state.auth);
-
-  const selectDate = (date: Moment | null) => {
-    if (date) {
-      setEvent({ ...event, date: formatDate(date.toDate()) });
-    }
-  };
+  const {
+    selectedDate: { date },
+  } = useTypedSelector((state) => state.event);
 
   const submitForm = () => {
-    props.submit({ ...event, author: user.username });
+    
+    if (date) {  
+        console.log('asfasf');
+      props.submit({ ...event, author: user.username, date });
+    }
   };
 
   return (
@@ -44,16 +43,7 @@ export const EventForm: FC<EventFormProps> = (props) => {
           value={event.description}
         />
       </Form.Item>
-      <Form.Item
-        label="Event date"
-        name="date"
-        rules={[
-          rules.required(),
-          rules.isDateAfter("Can't create event for a past date"),
-        ]}
-      >
-        <DatePicker onChange={(date) => selectDate(date)} />
-      </Form.Item>
+
       <Form.Item label="Guests" name="guest" rules={[rules.required()]}>
         <Select onChange={(guest: string) => setEvent({ ...event, guest })}>
           {props.guests.map((guest) => (

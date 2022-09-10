@@ -1,4 +1,10 @@
-import { EventActionEnum, SetEventsAction, SetGuestsAction } from "./types";
+import {
+  EventActionEnum,
+  EventState,
+  SetEventsAction,
+  SetGuestsAction,
+  SetSelectedDateAction,
+} from "./types";
 import { IUser } from "../../../models/IUser";
 import { IEvent } from "../../../models/IEvent";
 import UserService from "../../../api/UserService";
@@ -28,6 +34,29 @@ export const EventActionCreators = {
       json.push(event);
       dispatch(EventActionCreators.setEvents(json));
       localStorage.setItem("events", JSON.stringify(json));
+      if (json.length) {
+        dispatch(EventActionCreators.setSelectedDate({ removeAllowed: true }));
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  },
+  setSelectedDate: (
+    selDateProps: Partial<EventState["selectedDate"]>
+  ): SetSelectedDateAction => ({
+    type: EventActionEnum.SET_SELECTED_DATE,
+    payload: { ...selDateProps },
+  }),
+  removeEvents: (date: string) => async (dispatch: AppDispatch) => {
+    try {
+      const events = localStorage.getItem("events") || "[]";
+      const json = JSON.parse(events) as IEvent[];
+      const filteredEvents = json.filter((event) => event.date !== date);
+      dispatch(EventActionCreators.setEvents(filteredEvents));
+      localStorage.setItem("events", JSON.stringify(filteredEvents));
+      if (!filteredEvents.length) {
+        dispatch(EventActionCreators.setSelectedDate({ removeAllowed: false }));
+      }
     } catch (e) {
       console.log(e);
     }
