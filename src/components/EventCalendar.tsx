@@ -36,13 +36,8 @@ export const EventCalendar: FC<EventCalendarProps> = ({ events }) => {
       date: selDate,
       createAllowed: isDateAfter,
       error: isDateAfter ? "" : DATE_AFTER_ERROR_MESSAGE,
+      removeAllowed: hasEvents,
     });
-
-    if (hasEvents) {
-      setSelectedDate({
-        removeAllowed: hasEvents,
-      });
-    }
   };
 
   return (

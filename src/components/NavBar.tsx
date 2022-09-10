@@ -36,13 +36,9 @@ export const NavBar: React.FC = () => {
   return (
     <div>
       {isLoggedIn ? (
-        <>
-          <Menu theme="dark" mode="horizontal" items={authedMenu} />
-        </>
+        <Menu theme="dark" mode="horizontal" items={authedMenu} />
       ) : (
-        <>
-          <Menu theme="dark" mode="horizontal" items={menu} />
-        </>
+        <Menu theme="dark" mode="horizontal" items={menu} />
       )}
     </div>
   );
