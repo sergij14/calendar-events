@@ -33,7 +33,7 @@ const App = () => {
       setAuth(true);
       setUser({ username: localStorage.getItem("username") } as IUser);
     }
-  }, []);
+  }, []); //eslint-disable-line
 
   return (
     <Layout>

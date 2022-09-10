@@ -24,7 +24,7 @@ const Event: FC = () => {
   useEffect(() => {
     fetchGuests();
     fetchEvents(user.username);
-  }, []);
+  }, []); //eslint-disable-line
 
   const fireRemoveEvents = () => {
     date && removeEvents(date);
