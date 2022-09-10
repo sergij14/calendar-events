@@ -4,7 +4,7 @@ import { Menu } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 
-const NavBar: React.FC = () => {
+export const NavBar: React.FC = () => {
   const navigate = useNavigate();
   const { loggedIn } = useTypedSelector((state) => state.auth);
 
@@ -37,4 +37,3 @@ const NavBar: React.FC = () => {
   );
 };
 
-export default NavBar;

@@ -1,7 +1,7 @@
 import { Layout } from "antd";
 import React from "react";
 import { useRoutes, Navigate } from "react-router-dom";
-import NavBar from "./components/NavBar";
+import { NavBar } from "./components/NavBar";
 import { useTypedSelector } from "./hooks/useTypedSelector";
 import Event from "./pages/Event";
 import Login from "./pages/Login";
