@@ -1,6 +1,6 @@
 import { Layout } from "antd";
 import React, { useEffect } from "react";
-import { useRoutes } from "react-router-dom";
+import { Navigate, useRoutes } from "react-router-dom";
 import { NavBar } from "./components/NavBar";
 import { useActions } from "./hooks/useActions";
 import { useTypedSelector } from "./hooks/useTypedSelector";
@@ -20,11 +20,11 @@ const App = () => {
   const routes = useRoutes([
     {
       path: RouteName.EVENT,
-      element: isLoggedIn ? <Event /> : <Login />,
+      element: isLoggedIn ? <Event /> : <Navigate to="login" />,
     },
     {
       path: RouteName.LOGIN,
-      element: isLoggedIn ? <Event /> : <Login />,
+      element: isLoggedIn ? <Navigate to="/" /> : <Login />,
     },
   ]);
 
