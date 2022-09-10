@@ -1,14 +1,17 @@
 import React from "react";
 import type { MenuProps } from "antd";
 import { Menu } from "antd";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { useActions } from "../hooks/useActions";
 
 export const NavBar: React.FC = () => {
-  const { isLoggedIn } = useTypedSelector((state) => state.auth);
+  const {
+    isLoggedIn,
+    user: { username },
+  } = useTypedSelector((state) => state.auth);
+
   const { logout } = useActions();
-  let navigate = useNavigate();
 
   const menu: MenuProps["items"] = [
     {
@@ -18,6 +21,11 @@ export const NavBar: React.FC = () => {
   ];
 
   const authedMenu: MenuProps["items"] = [
+    {
+      key: 1,
+      label: username,
+      style: { pointerEvents: "none" },
+    },
     {
       key: 3,
       label: `Log out`,

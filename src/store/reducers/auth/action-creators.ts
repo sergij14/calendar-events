@@ -1,5 +1,5 @@
-import axios from "axios";
 import { AppDispatch } from "../..";
+import UserService from "../../../api/UserService";
 import { IUser } from "../../../models/IUser";
 import {
   AuthActionEnum,
@@ -31,7 +31,7 @@ export const AuthActionCreators = {
       dispatch(AuthActionCreators.setIsLoading(true));
       setTimeout(async () => {
         try {
-          const res = await axios.get<IUser[]>("./users.json");
+          const res = await UserService.getUsers();
           const user = res.data.find(
             (user: any) =>
               user.username === username && user.password === password

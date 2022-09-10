@@ -19,7 +19,7 @@ export const LoginForm: React.FC = () => {
   return (
     <Card>
       <Form
-        name="basic"
+        name="login-form"
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 16 }}
         initialValues={{ remember: true }}
