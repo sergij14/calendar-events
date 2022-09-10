@@ -6,6 +6,7 @@ import { IEvent } from "../models/IEvent";
 import { Moment } from "moment";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { formatDate } from "../utils/date";
+import { EVENT_TYPES } from "../constants/eventTypes";
 
 interface EventFormProps {
   guests: IUser[];
@@ -58,6 +59,17 @@ export const EventForm: FC<EventFormProps> = (props) => {
           {props.guests.map((guest) => (
             <Select.Option key={guest.username} value={guest.username}>
               {guest.username}
+            </Select.Option>
+          ))}
+        </Select>
+      </Form.Item>
+      <Form.Item label="Type" name="type" rules={[rules.required()]}>
+        <Select
+          onChange={(type: IEvent["type"]) => setEvent({ ...event, type })}
+        >
+          {EVENT_TYPES.map((type) => (
+            <Select.Option key={type} value={type}>
+              {type}
             </Select.Option>
           ))}
         </Select>

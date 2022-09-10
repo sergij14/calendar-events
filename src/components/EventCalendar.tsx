@@ -17,7 +17,7 @@ export const EventCalendar: FC<EventCalendarProps> = (props) => {
     return (
       <div>
         {currentDayEvents.map((ev, index) => (
-          <Badge status="success" key={index} text={ev.description} />
+          <Badge status={ev.type} key={index} text={ev.description} />
         ))}
       </div>
     );
