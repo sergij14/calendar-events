@@ -26,10 +26,31 @@ export const EventForm: FC<EventFormProps> = (props) => {
   };
 
   return (
-    <Form onFinish={submitForm} form={form}>
-      <Form.Item label="Event title" name="title" rules={[rules.required()]}>
-        <Input />
-      </Form.Item>
+    <Form layout="vertical" onFinish={submitForm} form={form}>
+      <div style={{ display: "flex", gap: "10px", width: "100%" }}>
+        <Form.Item
+          style={{ width: "50%" }}
+          label="Event title"
+          name="title"
+          rules={[rules.required()]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          style={{ width: "50%" }}
+          label="Type"
+          name="type"
+          rules={[rules.required()]}
+        >
+          <Select>
+            {EVENT_TYPES.map((type) => (
+              <Select.Option key={type} value={type}>
+                {type}
+              </Select.Option>
+            ))}
+          </Select>
+        </Form.Item>
+      </div>
 
       <Form.Item
         label="Event description"
@@ -48,15 +69,7 @@ export const EventForm: FC<EventFormProps> = (props) => {
           ))}
         </Select>
       </Form.Item>
-      <Form.Item label="Type" name="type" rules={[rules.required()]}>
-        <Select>
-          {EVENT_TYPES.map((type) => (
-            <Select.Option key={type} value={type}>
-              {type}
-            </Select.Option>
-          ))}
-        </Select>
-      </Form.Item>
+
       <Row justify="end">
         <Form.Item>
           <Space direction="horizontal" size="small">
