@@ -5,6 +5,7 @@ import { useTypedSelector } from "../hooks/useTypedSelector";
 import { IEvent } from "../models/IEvent";
 import { EventCalendar } from "../components/EventCalendar";
 import { EventForm } from "../components/EventForm";
+import { MinusCircleOutlined, PlusCircleOutlined } from "@ant-design/icons";
 
 export interface RemoveEvent {
   allow: boolean;
@@ -44,16 +45,21 @@ const Event: FC = () => {
   };
 
   return (
-    <Layout style={{ backgroundColor: "white", padding: '8px'}}>
+    <Layout style={{ backgroundColor: "white", padding: "8px" }}>
       <EventCalendar events={events} />
       <Row justify="center">
         <Space size="small">
           <Tooltip title={error && error}>
-            <Button onClick={() => showModal()} disabled={!createAllowed}>
+            <Button
+              icon={<PlusCircleOutlined />}
+              onClick={() => showModal()}
+              disabled={!createAllowed}
+            >
               Add an event
             </Button>
           </Tooltip>
           <Button
+            icon={<MinusCircleOutlined />}
             disabled={!removeAllowed}
             htmlType="button"
             onClick={() => fireRemoveEvents()}
