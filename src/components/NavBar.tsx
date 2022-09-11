@@ -40,9 +40,14 @@ export const NavBar: React.FC = () => {
   return (
     <>
       {isLoggedIn ? (
-        <Menu theme="dark" mode="horizontal" items={authedMenu} />
+        <Menu
+          selectable={false}
+          theme="dark"
+          mode="horizontal"
+          items={authedMenu}
+        />
       ) : (
-        <Menu theme="dark" mode="horizontal" items={menu} />
+        <Menu selectable={false} theme="dark" mode="horizontal" items={menu} />
       )}
     </>
   );
