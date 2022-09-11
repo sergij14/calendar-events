@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Button, Form, Input, Row, Select } from "antd";
+import { Button, Form, Input, Row, Select, Space } from "antd";
 import { rules } from "../utils/rules";
 import { IUser } from "../models/IUser";
 import { IEvent } from "../models/IEvent";
@@ -12,7 +12,6 @@ interface EventFormProps {
 }
 
 export const EventForm: FC<EventFormProps> = (props) => {
-
   const { user } = useTypedSelector((state) => state.auth);
   const [form] = Form.useForm();
   const {
@@ -60,9 +59,12 @@ export const EventForm: FC<EventFormProps> = (props) => {
       </Form.Item>
       <Row justify="end">
         <Form.Item>
-          <Button type="primary" htmlType="submit">
-            Create
-          </Button>
+          <Space direction="horizontal" size="small">
+            <Button type="primary" htmlType="submit">
+              Create
+            </Button>
+            <Button onClick={() => form.resetFields()}>Reset</Button>
+          </Space>
         </Form.Item>
       </Row>
     </Form>

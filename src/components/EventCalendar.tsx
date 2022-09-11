@@ -5,6 +5,7 @@ import moment, { Moment } from "moment";
 import { formatDate } from "../utils/date";
 import { useActions } from "../hooks/useActions";
 import { DATE_AFTER_ERROR_MESSAGE } from "../constants";
+import { ArrowRightOutlined, UsergroupAddOutlined } from "@ant-design/icons";
 
 interface EventCalendarProps {
   events: IEvent[];
@@ -23,11 +24,19 @@ export const EventCalendar: FC<EventCalendarProps> = ({ events }) => {
           <Popover
             style={{ display: "block" }}
             key={index}
-            title={<Typography.Text strong>{ev.title}</Typography.Text>}
+            title={
+              <Space size="small">
+                <ArrowRightOutlined />
+                <Typography.Text strong>{ev.title}</Typography.Text>
+              </Space>
+            }
             content={
               <Space size="small" direction="vertical">
                 <p>{ev.description}</p>
-                <p> <Typography.Text strong>Guests:</Typography.Text> {ev.guest.toString()}</p>
+                <Space size="small">
+                  <UsergroupAddOutlined />
+                  {ev.guest.toString()}
+                </Space>
               </Space>
             }
           >
