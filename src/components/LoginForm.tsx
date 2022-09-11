@@ -8,12 +8,9 @@ import { rules } from "../utils/rules";
 export const LoginForm: React.FC = () => {
   const { error, isLoading } = useTypedSelector((state) => state.auth);
   const { login } = useActions();
+  
   const onFinish = (values: IUser) => {
     login(values.username, values.password);
-  };
-
-  const onFinishFailed = (errorInfo: any) => {
-    console.log("Failed:", errorInfo);
   };
 
   return (
@@ -21,7 +18,6 @@ export const LoginForm: React.FC = () => {
       <Form
         name="login-form"
         onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
         autoComplete="off"
       >
         {error && (

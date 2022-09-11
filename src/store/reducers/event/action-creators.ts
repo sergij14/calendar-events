@@ -9,6 +9,7 @@ import { IUser } from "../../../models/IUser";
 import { IEvent } from "../../../models/IEvent";
 import UserService from "../../../api/UserService";
 import { AppDispatch } from "../..";
+import { getDataFromLS } from "../../../utils/getDataFromLS";
 
 export const EventActionCreators = {
   setGuests: (payload: IUser[]): SetGuestsAction => ({
@@ -29,8 +30,7 @@ export const EventActionCreators = {
   },
   createEvent: (event: IEvent) => async (dispatch: AppDispatch) => {
     try {
-      const events = localStorage.getItem("events") || "[]";
-      const json = JSON.parse(events) as IEvent[];
+      const json = getDataFromLS<IEvent[]>("events");
       json.push(event);
       dispatch(EventActionCreators.setEvents(json));
       localStorage.setItem("events", JSON.stringify(json));
@@ -49,8 +49,7 @@ export const EventActionCreators = {
   }),
   removeEvents: (date: string) => async (dispatch: AppDispatch) => {
     try {
-      const events = localStorage.getItem("events") || "[]";
-      const json = JSON.parse(events) as IEvent[];
+      const json = getDataFromLS<IEvent[]>("events");
       const filteredEvents = json.filter((event) => event.date !== date);
       dispatch(EventActionCreators.setEvents(filteredEvents));
       localStorage.setItem("events", JSON.stringify(filteredEvents));
@@ -63,8 +62,7 @@ export const EventActionCreators = {
   },
   fetchEvents: (username: string) => async (dispatch: AppDispatch) => {
     try {
-      const events = localStorage.getItem("events") || "[]";
-      const json = JSON.parse(events) as IEvent[];
+      const json = getDataFromLS<IEvent[]>("events");
       const currentUserEvents = json.filter(
         (ev) => ev.author === username || ev.guest === username
       );
