@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import { Button, Form, Input, Row, Select } from "antd";
 import { rules } from "../utils/rules";
 import { IUser } from "../models/IUser";
@@ -12,22 +12,16 @@ interface EventFormProps {
 }
 
 export const EventForm: FC<EventFormProps> = (props) => {
-  const [event, setEvent] = useState<IEvent>({
-    author: "",
-    title: "",
-    date: "",
-    description: "",
-    guest: "",
-  } as IEvent);
+
   const { user } = useTypedSelector((state) => state.auth);
   const [form] = Form.useForm();
   const {
     selectedDate: { date },
   } = useTypedSelector((state) => state.event);
 
-  const submitForm = () => {
+  const submitForm = (values: IEvent) => {
     if (date) {
-      props.submit({ ...event, author: user.username, date });
+      props.submit({ ...values, author: user.username, date });
       form.resetFields();
     }
   };
@@ -35,10 +29,7 @@ export const EventForm: FC<EventFormProps> = (props) => {
   return (
     <Form onFinish={submitForm} form={form}>
       <Form.Item label="Event title" name="title" rules={[rules.required()]}>
-        <Input
-          onChange={(e) => setEvent({ ...event, title: e.target.value })}
-          value={event.title}
-        />
+        <Input />
       </Form.Item>
 
       <Form.Item
@@ -46,18 +37,11 @@ export const EventForm: FC<EventFormProps> = (props) => {
         name="description"
         rules={[rules.required()]}
       >
-        <Input.TextArea
-          onChange={(e) => setEvent({ ...event, description: e.target.value })}
-          value={event.description}
-        />
+        <Input.TextArea />
       </Form.Item>
 
       <Form.Item label="Guests" name="guest" rules={[rules.required()]}>
-        <Select
-          onChange={(guest: string) => setEvent({ ...event, guest })}
-          mode="multiple"
-          allowClear
-        >
+        <Select mode="multiple" allowClear>
           {props.guests.map((guest) => (
             <Select.Option key={guest.username} value={guest.username}>
               {guest.username}
@@ -66,9 +50,7 @@ export const EventForm: FC<EventFormProps> = (props) => {
         </Select>
       </Form.Item>
       <Form.Item label="Type" name="type" rules={[rules.required()]}>
-        <Select
-          onChange={(type: IEvent["type"]) => setEvent({ ...event, type })}
-        >
+        <Select>
           {EVENT_TYPES.map((type) => (
             <Select.Option key={type} value={type}>
               {type}
