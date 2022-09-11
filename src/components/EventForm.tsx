@@ -26,7 +26,7 @@ export const EventForm: FC<EventFormProps> = (props) => {
   };
 
   return (
-    <Form layout="vertical" onFinish={submitForm} form={form}>
+    <Form initialValues={{type: 'default'}} layout="vertical" onFinish={submitForm} form={form}>
       <div style={{ display: "flex", gap: "10px", width: "100%" }}>
         <Form.Item
           style={{ width: "50%" }}
@@ -36,12 +36,7 @@ export const EventForm: FC<EventFormProps> = (props) => {
         >
           <Input />
         </Form.Item>
-        <Form.Item
-          style={{ width: "50%" }}
-          label="Type"
-          name="type"
-          rules={[rules.required()]}
-        >
+        <Form.Item style={{ width: "50%" }} label="Type" name="type">
           <Select>
             {EVENT_TYPES.map((type) => (
               <Select.Option key={type} value={type}>
