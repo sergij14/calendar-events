@@ -5,6 +5,6 @@ export interface IEvent {
   guest: string;
   date: string;
   description: string;
-  type: BadgeProps['status']
+  type: Exclude<BadgeProps['status'], undefined>
   title: string,
 }

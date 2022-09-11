@@ -4,8 +4,8 @@ import { IEvent } from "../models/IEvent";
 import moment, { Moment } from "moment";
 import { formatDate } from "../utils/date";
 import { useActions } from "../hooks/useActions";
-import { DATE_AFTER_ERROR_MESSAGE } from "../constants";
-import { ArrowRightOutlined, UsergroupAddOutlined } from "@ant-design/icons";
+import { DATE_AFTER_ERROR_MESSAGE, EVENT_TYPE_COLORS } from "../constants";
+import { RightCircleOutlined, UsergroupAddOutlined } from "@ant-design/icons";
 
 interface EventCalendarProps {
   events: IEvent[];
@@ -25,7 +25,7 @@ export const EventCalendar: FC<EventCalendarProps> = ({ events }) => {
             key={index}
             title={
               <Space size="small">
-                <ArrowRightOutlined />
+                <RightCircleOutlined style={{color: EVENT_TYPE_COLORS[ev.type]}} />
                 <Typography.Text strong>{ev.title}</Typography.Text>
               </Space>
             }
