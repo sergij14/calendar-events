@@ -69,7 +69,7 @@ export const EventCalendar: FC<EventCalendarProps> = ({ events }) => {
   return (
     <>
       <Row justify="center">
-        <Alert message={`You selected date: ${date}`} />
+        <Alert message={`Selected date: ${date}`} />
       </Row>
 
       <Calendar
