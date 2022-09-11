@@ -1,11 +1,12 @@
 import { DATE_AFTER_ERROR_MESSAGE } from "../../../constants";
+import { formatDate } from "../../../utils/date";
 import { EventAction, EventActionEnum, EventState } from "./types";
 
 const initialState: EventState = {
   events: [],
   guests: [],
   selectedDate: {
-    date: "",
+    date: formatDate(new Date()),
     createAllowed: false,
     removeAllowed: false,
     error: DATE_AFTER_ERROR_MESSAGE,

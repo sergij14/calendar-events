@@ -1,11 +1,12 @@
 import React, { FC } from "react";
-import { Badge, Calendar, Popover, Space, Typography } from "antd";
+import { Alert, Badge, Calendar, Popover, Row, Space, Typography } from "antd";
 import { IEvent } from "../models/IEvent";
 import moment, { Moment } from "moment";
 import { formatDate } from "../utils/date";
 import { useActions } from "../hooks/useActions";
 import { DATE_AFTER_ERROR_MESSAGE, EVENT_TYPE_COLORS } from "../constants";
 import { RightCircleOutlined, UsergroupAddOutlined } from "@ant-design/icons";
+import { useTypedSelector } from "../hooks/useTypedSelector";
 
 interface EventCalendarProps {
   events: IEvent[];
@@ -13,6 +14,9 @@ interface EventCalendarProps {
 
 export const EventCalendar: FC<EventCalendarProps> = ({ events }) => {
   const { setSelectedDate } = useActions();
+  const {
+    selectedDate: { date },
+  } = useTypedSelector((state) => state.event);
 
   const dateCellRender = (value: Moment) => {
     const formatedDate = formatDate(value.toDate());
@@ -25,7 +29,9 @@ export const EventCalendar: FC<EventCalendarProps> = ({ events }) => {
             key={index}
             title={
               <Space size="small">
-                <RightCircleOutlined style={{color: EVENT_TYPE_COLORS[ev.type]}} />
+                <RightCircleOutlined
+                  style={{ color: EVENT_TYPE_COLORS[ev.type] }}
+                />
                 <Typography.Text strong>{ev.title}</Typography.Text>
               </Space>
             }
@@ -61,10 +67,16 @@ export const EventCalendar: FC<EventCalendarProps> = ({ events }) => {
   };
 
   return (
-    <Calendar
-      mode="month"
-      onSelect={onDateSelect}
-      dateCellRender={dateCellRender}
-    />
+    <>
+      <Row justify="center">
+        <Alert message={`You selected date: ${date}`} />
+      </Row>
+
+      <Calendar
+        mode="month"
+        onSelect={onDateSelect}
+        dateCellRender={dateCellRender}
+      />
+    </>
   );
 };
