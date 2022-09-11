@@ -6,4 +6,5 @@ export interface IEvent {
   date: string;
   description: string;
   type: BadgeProps['status']
+  title: string,
 }

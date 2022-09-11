@@ -14,11 +14,13 @@ interface EventFormProps {
 export const EventForm: FC<EventFormProps> = (props) => {
   const [event, setEvent] = useState<IEvent>({
     author: "",
+    title: "",
     date: "",
     description: "",
     guest: "",
   } as IEvent);
   const { user } = useTypedSelector((state) => state.auth);
+  const [form] = Form.useForm();
   const {
     selectedDate: { date },
   } = useTypedSelector((state) => state.event);
@@ -26,17 +28,25 @@ export const EventForm: FC<EventFormProps> = (props) => {
   const submitForm = () => {
     if (date) {
       props.submit({ ...event, author: user.username, date });
+      form.resetFields();
     }
   };
 
   return (
-    <Form onFinish={submitForm}>
+    <Form onFinish={submitForm} form={form}>
+      <Form.Item label="Event title" name="title" rules={[rules.required()]}>
+        <Input
+          onChange={(e) => setEvent({ ...event, title: e.target.value })}
+          value={event.title}
+        />
+      </Form.Item>
+
       <Form.Item
         label="Event description"
         name="description"
         rules={[rules.required()]}
       >
-        <Input
+        <Input.TextArea
           onChange={(e) => setEvent({ ...event, description: e.target.value })}
           value={event.description}
         />

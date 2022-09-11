@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Badge, Calendar } from "antd";
+import { Badge, Calendar, Popover, Space, Typography } from "antd";
 import { IEvent } from "../models/IEvent";
 import moment, { Moment } from "moment";
 import { formatDate } from "../utils/date";
@@ -18,18 +18,30 @@ export const EventCalendar: FC<EventCalendarProps> = ({ events }) => {
     const currentDayEvents = events.filter((ev) => ev.date === formatedDate);
 
     return (
-      <div>
+      <Space size="small" direction="vertical">
         {currentDayEvents.map((ev, index) => (
-          <Badge status={ev.type} key={index} text={ev.description} />
+          <Popover
+            style={{ display: "block" }}
+            key={index}
+            title={<Typography.Text strong>{ev.title}</Typography.Text>}
+            content={
+              <Space size="small" direction="vertical">
+                <p>{ev.description}</p>
+                <p> <Typography.Text strong>Guests:</Typography.Text> {ev.guest.toString()}</p>
+              </Space>
+            }
+          >
+            <Badge status={ev.type} text={ev.description} />
+          </Popover>
         ))}
-      </div>
+      </Space>
     );
   };
 
   const onDateSelect = (date: Moment) => {
     const selDate = formatDate(date.toDate()).toString();
 
-    const isDateAfter = date.isSameOrAfter(moment());
+    const isDateAfter = date.isAfter(moment());
     const hasEvents = events.filter((ev) => ev.date === selDate).length > 0;
 
     setSelectedDate({
