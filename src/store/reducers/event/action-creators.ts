@@ -53,7 +53,8 @@ export const EventActionCreators = {
       const filteredEvents = json.filter((event) => event.date !== date);
       dispatch(EventActionCreators.setEvents(filteredEvents));
       localStorage.setItem("events", JSON.stringify(filteredEvents));
-      if (!filteredEvents.length) {
+
+      if (!filteredEvents.find((event) => event.date === date)) {
         dispatch(EventActionCreators.setSelectedDate({ removeAllowed: false }));
       }
     } catch (e) {
