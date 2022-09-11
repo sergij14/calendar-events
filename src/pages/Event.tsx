@@ -74,7 +74,10 @@ const Event: FC = () => {
         open={isModalOpen}
         onCancel={handleCancel}
       >
-        <EventForm guests={guests} submit={addNewEvent} />
+        <EventForm
+          guests={guests.filter((guest) => guest.username !== user.username)}
+          submit={addNewEvent}
+        />
       </Modal>
     </Layout>
   );

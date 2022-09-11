@@ -22,7 +22,6 @@ export const EventCalendar: FC<EventCalendarProps> = ({ events }) => {
       <Space size="small" direction="vertical">
         {currentDayEvents.map((ev, index) => (
           <Popover
-            style={{ display: "block" }}
             key={index}
             title={
               <Space size="small">
