@@ -1,5 +1,5 @@
 import { DATE_AFTER_ERROR_MESSAGE } from "../../../constants";
-import { formatDate } from "../../../utils/date";
+import { formatDate } from "../../../utils";
 import { EventAction, EventActionEnum, EventState } from "./types";
 
 const initialState: EventState = {

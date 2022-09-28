@@ -3,8 +3,8 @@ import { Button, Form, Input, Row, Select, Space } from "antd";
 import { rules } from "../utils/rules";
 import { IUser } from "../models/IUser";
 import { IEvent } from "../models/IEvent";
-import { useTypedSelector } from "../hooks/useTypedSelector";
 import { EVENT_TYPES } from "../constants";
+import { useTypedSelector } from "../hooks";
 
 interface EventFormProps {
   guests: IUser[];

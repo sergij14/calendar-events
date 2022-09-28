@@ -1,11 +1,10 @@
 import React, { FC, useEffect, useState } from "react";
 import { Button, Layout, Modal, Row, Space, Tooltip } from "antd";
-import { useActions } from "../hooks/useActions";
-import { useTypedSelector } from "../hooks/useTypedSelector";
 import { IEvent } from "../models/IEvent";
 import { EventCalendar } from "../components/EventCalendar";
 import { EventForm } from "../components/EventForm";
 import { MinusCircleOutlined, PlusCircleOutlined } from "@ant-design/icons";
+import { useActions, useTypedSelector } from "../hooks";
 
 export interface RemoveEvent {
   allow: boolean;

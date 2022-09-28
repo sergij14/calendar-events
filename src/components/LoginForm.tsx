@@ -1,7 +1,6 @@
 import { Alert, Button, Card, Form, Input } from "antd";
 import React from "react";
-import { useActions } from "../hooks/useActions";
-import { useTypedSelector } from "../hooks/useTypedSelector";
+import { useActions, useTypedSelector } from "../hooks";
 import { IUser } from "../models/IUser";
 import { rules } from "../utils/rules";
 

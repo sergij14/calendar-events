@@ -2,11 +2,10 @@ import React, { FC } from "react";
 import { Alert, Badge, Calendar, Popover, Row, Space, Typography } from "antd";
 import { IEvent } from "../models/IEvent";
 import moment, { Moment } from "moment";
-import { formatDate } from "../utils/date";
-import { useActions } from "../hooks/useActions";
 import { DATE_AFTER_ERROR_MESSAGE, EVENT_TYPE_COLORS } from "../constants";
 import { RightCircleOutlined, UsergroupAddOutlined } from "@ant-design/icons";
-import { useTypedSelector } from "../hooks/useTypedSelector";
+import { formatDate } from "../utils";
+import { useActions, useTypedSelector } from "../hooks";
 
 interface EventCalendarProps {
   events: IEvent[];

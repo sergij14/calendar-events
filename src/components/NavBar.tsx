@@ -2,9 +2,8 @@ import React from "react";
 import type { MenuProps } from "antd";
 import { Menu } from "antd";
 import { Link } from "react-router-dom";
-import { useTypedSelector } from "../hooks/useTypedSelector";
-import { useActions } from "../hooks/useActions";
 import { LoginOutlined, LogoutOutlined, UserOutlined } from "@ant-design/icons";
+import { useActions, useTypedSelector } from "../hooks";
 
 export const NavBar: React.FC = () => {
   const {
