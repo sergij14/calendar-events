@@ -47,7 +47,7 @@ export const LoginForm: React.FC = () => {
             Login
           </Button>
         </Form.Item>
-        <Alert type="warning" message="login: sergij14 | pass: 12345678" />
+        <Alert type="warning" message="login: admin | password: 12345678" />
       </Form>
     </Card>
   );
